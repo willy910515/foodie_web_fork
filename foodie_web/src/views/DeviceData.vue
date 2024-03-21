@@ -45,7 +45,7 @@ export default {
             console.log(this.$route.params.mac_address)
         },
         getDate(){
-            axios.get("http://localhost:3030/api/food_history/device/"+ this.$route.params.mac_address).then((res)=>{
+            axios.get("http://114.32.9.225:3030/api/food_history/device/"+ this.$route.params.mac_address).then((res)=>{
                 console.log(res.data)
                 this.data = res.data
                 
