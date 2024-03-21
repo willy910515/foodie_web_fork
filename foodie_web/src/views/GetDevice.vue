@@ -60,7 +60,7 @@ export default {
     },
     methods: {
         getDeice(){
-            axios.get("http://114.32.9.225:3030/api/food_history/device").then((res)=>{
+            axios.get("/api/food_history/device").then((res)=>{
                 this.data = res.data
                 console.log(this.data)
             })

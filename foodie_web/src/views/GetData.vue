@@ -409,7 +409,7 @@ export default {
             gauage_chart.setOption(option)
         },
         getData(){
-            const path ="http://114.32.9.225:3030/api/food_history/device/"+this.$route.params.mac_address+"/date/"+this.$route.params.date
+            const path ="/api/food_history/device/"+this.$route.params.mac_address+"/date/"+this.$route.params.date
             axios.get(path).then((response) => {
                 // console.log(response.data)
                 this.data = response.data
