@@ -18,13 +18,22 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue')
     },
     {
+      path: '/device/:mac_address/date/:date/food_order/:order',
+      name: 'foodOrderInfo',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/FoodOrderInfo.vue')
+    },
+    {
       path: '/device/:mac_address/date/:date',
       name: 'getData',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/GetData.vue')
-    },{
+    },
+    {
       path: '/device',
       name: 'device',
       // route level code-splitting
@@ -40,6 +49,7 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/DeviceData.vue')
     }
+    
   ]
 })
 

@@ -23,9 +23,14 @@
         </v-row>
        
         
-     
+
    
     </v-container>
+
+
+
+
+    
 </template>
 <script>
 import axios from 'axios'
@@ -37,13 +42,11 @@ export default {
         }
     },
     beforeMount() {
-        this.test()
+   
         this.getDate()
     },
     methods: {
-        test(){
-            console.log(this.$route.params.mac_address)
-        },
+       
         getDate(){
             axios.get("/api/food_history/device/"+ this.$route.params.mac_address).then((res)=>{
                 console.log(res.data)
@@ -54,6 +57,8 @@ export default {
     },
 }
 </script>
+
+
 <style lang="">
     
 </style>

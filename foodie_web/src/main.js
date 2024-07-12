@@ -8,9 +8,10 @@ import * as mdijs from '@mdi/js'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-
+import { VCalendar } from 'vuetify/labs/VCalendar'
 import { createStore } from 'vuex'
 
 
@@ -46,10 +47,18 @@ const store = createStore({
 })
 
 const app = createApp(App)
-const vuetify = createVuetify({
+const vuetify = createVuetify({                                                              
     components,
-    directives,
+    directives
+    // components: {
+    //   VCalendar,
+    // },
+    
+    
+    
   })
+
+
 app.use(router)
 app.use(vuetify)
 app.use(mdiVue, {

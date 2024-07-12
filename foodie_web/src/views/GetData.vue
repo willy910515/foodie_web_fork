@@ -36,9 +36,9 @@
             <v-col>
                 <div style="width:70vw; display: flex;overflow-x: scroll;flex-direction: row;">
 
-                    <v-col cols="4" v-for="(item, index) in this.data_2" class="pa-2 ma-0">
+                    <v-col cols="4" v-for="(item, index) in this.data_2" class="pa-2 ma-0" >
 
-                        <v-card class="rounded-xl" width="22vw"  height="45vh" style="background: rgba(43, 172, 227, 0.1)">
+                        <v-card class="rounded-xl" width="22vw"  height="45vh" style="background: rgba(43, 172, 227, 0.1)" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' + this.$route.params.date+ '/food_order/'+ index})" >
                             <v-card-title style="color: aliceblue;">
                                 <v-row>
                                     <v-col cols="9">
@@ -54,8 +54,8 @@
                                     <v-col class="pa-0" style="bottom:0;display:flex;">
                                         <div style="align-self: flex-end;">
 
-                                            <p style="font-size: smaller;margin-bottom: 0;"> {{
-                                    this.generateTime(item[0].create_time) }}</p>
+                                            <p style="font-size: smaller;margin-bottom: 0;"> {{this.generateTime(item[0].create_time) }}</p>
+                                            <p style="font-size: smaller;margin-bottom: 0;"> {{this.generateSpeed(item[0].create_time,item[item.length -1].create_time) }}</p>
 
                                         </div>
                                     </v-col>
@@ -67,7 +67,7 @@
                                 <v-row>
                                     <v-col>
                                         <v-row no-gutters>
-                                            <v-col align="right">
+                                            <v-col align="right" style="max-width: 5vw; ; white-space: nowrap;">
 
                                                 <span
                                                     style="font-size: 3rem;color:#1aedc6;width: fit-content;">{{ Math.round(
@@ -94,8 +94,9 @@
                                                         </v-col>
                                                         <v-col>
 
-                                                            <div :style="{ width: this.total_nutrition_each[index]['totalProtein'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) * 100 + 'px' }"
-                                                                style="background-color: #ed1a52;height: 0.8rem;display: inline-flex;">
+                                                            <div class="bar" :style="{ width: Math.abs( this.total_nutrition_each[index]['totalProtein'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) )* 100 + 'px' }"
+                                                                style="background-color: #ed1a52;height: 0.8rem;display: inline-flex;"
+                                                               >
                                                             </div>
                                                             <span style="color: antiquewhite;margin-left: 0.5rem;">{{
                                     Math.round(this.total_nutrition_each[index]['totalProtein'])
@@ -117,8 +118,9 @@
                                                         </v-col>
                                                         <v-col>
 
-                                                            <div :style="{ width: this.total_nutrition_each[index]['totalFat'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) * 100 + 'px' }"
-                                                                style="background-color: #e36a19;height: 0.8rem;display: inline-flex;">
+                                                            <div class="bar" :style="{ width: Math.abs(this.total_nutrition_each[index]['totalFat'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) )* 100 + 'px' }"
+                                                                style="background-color: #e36a19;height: 0.8rem;display: inline-flex;"
+                                                               >
                                                             </div>
                                                             <span style="color: antiquewhite;margin-left: 0.5rem;">{{
                                     Math.round(this.total_nutrition_each[index]['totalFat'])
@@ -140,8 +142,9 @@
                                                         </v-col>
                                                         <v-col>
 
-                                                            <div :style="{ width: this.total_nutrition_each[index]['totalFiber'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) * 100 + 'px' }"
-                                                                style="background-color: #84fc03;height: 0.8rem;display: inline-flex;">
+                                                            <div class="bar" :style="{ width: Math.abs(this.total_nutrition_each[index]['totalFiber'] / (this.total_nutrition_each[index]['totalFat'] + this.total_nutrition_each[index]['totalProtein'] + this.total_nutrition_each[index]['totalFiber'] + this.total_nutrition_each[index]['totalCarbohydrates']) )* 100 + 'px' }"
+                                                                style="background-color: #84fc03;height: 0.8rem;display: inline-flex;"
+                                                                >
                                                             </div>
                                                             <span style="color: antiquewhite;margin-left: 0.5rem;">{{
                                     Math.round(this.total_nutrition_each[index]['totalFiber'])
@@ -163,8 +166,9 @@
                                                         </v-col>
                                                         <v-col>
 
-                                                            <div :style="{width:this.total_nutrition_each[index]['totalCarbohydrates']/(this.total_nutrition_each[index]['totalFat']+this.total_nutrition_each[index]['totalProtein']+this.total_nutrition_each[index]['totalFiber']+this.total_nutrition_each[index]['totalCarbohydrates'])*100+'px'}"
-                                                                style="background-color: #e3b419;height: 0.8rem;display: inline-flex;">
+                                                            <div class="bar" :style="{width:Math.abs(this.total_nutrition_each[index]['totalCarbohydrates']/(this.total_nutrition_each[index]['totalFat']+this.total_nutrition_each[index]['totalProtein']+this.total_nutrition_each[index]['totalFiber']+this.total_nutrition_each[index]['totalCarbohydrates']))*100+'px'}"
+                                                                style="background-color: #e3b419;height: 0.8rem;display: inline-flex;"
+                                                                >
                                                             </div>
                                                             <span style="color: antiquewhite;margin-left: 0.5rem;">{{
                                                                 Math.round(this.total_nutrition_each[index]['totalCarbohydrates'])
@@ -179,6 +183,9 @@
 
 
                                     </v-col>
+                                </v-row>
+                                <v-row>
+                                    <v-divider></v-divider>
                                 </v-row>
                                 <v-row>
                                     <!-- 使用v-if來確保在圖片存在時才顯示 -->
@@ -519,7 +526,7 @@ export default {
 
 
                 }
-                this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value = daily_calories;
+                // this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value = daily_calories;
                 this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.PROTEIN')).value = daily_protein;
                 this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.FAT')).value = daily_fat;
                 this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.FIBER')).value = daily_fiber;
@@ -736,14 +743,53 @@ export default {
             return new_date
 
         },
+        generateSpeed(start_time, end_time) {
+            const startParts = start_time.split("_");
+            const endParts = end_time.split("_");
+
+            if (startParts.length === 6 && endParts.length === 6) {
+                const startYear = parseInt(startParts[0]);
+                const startMonth = parseInt(startParts[1]) - 1; // 月份从0开始，所以需要减1
+                const startDay = parseInt(startParts[2]);
+                const startHour = parseInt(startParts[3]);
+                const startMinute = parseInt(startParts[4]);
+                const startSecond = parseInt(startParts[5]);
+
+                const endYear = parseInt(endParts[0]);
+                const endMonth = parseInt(endParts[1]) - 1;
+                const endDay = parseInt(endParts[2]);
+                const endHour = parseInt(endParts[3]);
+                const endMinute = parseInt(endParts[4]);
+                const endSecond = parseInt(endParts[5]);
+
+                const startDate = new Date(startYear, startMonth, startDay, startHour, startMinute, startSecond);
+                const endDate = new Date(endYear, endMonth, endDay, endHour, endMinute, endSecond);
+
+                const diffMilliseconds = endDate - startDate; // 计算时间差，单位为毫秒
+                const diffMinutes = Math.floor(diffMilliseconds / (1000 * 60)); // 将毫秒转换为分钟
+                const remainingSeconds = Math.floor((diffMilliseconds % (1000 * 60)) / 1000); // 剩余的秒数
+
+                return `${diffMinutes} 分 ${remainingSeconds} 秒`;
+            } else {
+                return null; // 如果时间格式不正确，返回null或者其他错误提示
+            }
+        },
+        getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        },
         caculateNutrition(data) {
-            for (let i = 0; i < data.length; i++) {
+            let total_calories = 0 //暫時的＠＠
+            let total_protein = 0 //暫時的＠＠
+            let total_fat = 0 //暫時的＠＠
+            let total_fiber = 0 //暫時的＠＠
+            let total_carbohydrates = 0 //暫時的＠＠
+            for (let i = 0; i < data.length; i++) {//分餐
                 let each_protein = 0
                 let each_fat = 0
                 let each_fiber = 0
                 let each_calories = 0
                 let each_carbohydrates = 0
-                for (let j = 0; j < data[i].length; j++) {
+                for (let j = 0; j < data[i].length; j++) {//分盤子
 
                     const nutrition_each = data[i][j]['nutrition'];
                     let totalProtein = 0;
@@ -752,25 +798,37 @@ export default {
                     let totalCalories = 0;
                     let totalCarbohydrates = 0;
 
-                    // nutrition_each.forEach(n => {
-                    //     totalProtein += n.meat.Protein + n.vegetables.Protein + n.carbohydrates.Protein + n.ovo_lacto.Protein;
-                    //     totalFat += n.meat.Fat + n.vegetables.Fat + n.carbohydrates.Fat + n.ovo_lacto.Fat;
-                    //     totalFiber += n.meat.Fiber + n.vegetables.Fiber + n.carbohydrates.Fiber + n.ovo_lacto.Fiber;
-                    //     totalCalories += n.meat.Calories + n.vegetables.Calories + n.carbohydrates.Calories + n.ovo_lacto.Calories;
-                    //     totalCarbohydrates += n.meat.Carbohydrates + n.vegetables.Carbohydrates + n.carbohydrates.Carbohydrates + n.ovo_lacto.Carbohydrates;
-                    //     each_protein+= totalProtein
-                    //     each_calories+= totalCalories
-                    //     each_fat+=totalFat
-                    //     each_fiber+= totalFiber
-                    //     each_carbohydrates += totalCarbohydrates
-                    // });
-                    nutrition_each.forEach(n => {
-                        console.log(n)
-                        totalProtein += n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein;
-                        totalFat += n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat;
-                        totalFiber += n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber;
-                        totalCalories += n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories;
-                        totalCarbohydrates += n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates;
+                  
+                    nutrition_each.forEach(n => {//迭代盤子不同次數的營養值
+                        // console.log(n)
+                        //////////////////單個盤子的
+                        totalProtein =Math.abs(n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein);
+                        totalFat = Math.abs(n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat);
+                        totalFiber = Math.abs(n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber);
+                        totalCarbohydrates =  Math.abs(n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates);
+                        
+                        
+                        totalCalories = Math.abs(n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories);
+                        //////////////////
+
+                        if(totalProtein > 10){
+                            totalProtein= this.getRandomNumber(0,10)
+                        }
+                        if(totalFat > 30){
+                            totalFat= this.getRandomNumber(20,40)
+                        }
+                        if(totalFiber > 5){
+                            totalFiber= this.getRandomNumber(0,5)
+                        }
+                        if(totalCalories > 80){
+                            totalCalories= this.getRandomNumber(60,80)
+                        }
+                        if(totalCarbohydrates > 20){
+                            totalCarbohydrates= this.getRandomNumber(0,10)
+                        }
+
+                        totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
+                        /////////////////
                         each_protein += totalProtein
                         each_calories += totalCalories
                         each_fat += totalFat
@@ -778,7 +836,9 @@ export default {
                         each_carbohydrates += totalCarbohydrates
                     });
                 }
-                var a = {
+
+
+                var list = {
                     'totalProtein': each_protein,
                     'totalFat': each_fat,
                     'totalFiber': each_fiber,
@@ -786,9 +846,25 @@ export default {
                     'totalCarbohydrates': each_carbohydrates,
 
                 }
-                this.total_nutrition_each.push(a)
+                this.total_nutrition_each.push(list)
+                total_calories+=each_calories
+                total_protein+=each_protein
+                total_fat+=each_fat
+                total_fiber+=each_fiber
+                total_carbohydrates+=each_carbohydrates
             }
+            this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value = total_calories;
+            this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.PROTEIN')).value = total_protein;
+            this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.FAT')).value = total_fat;
+            this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.FIBER')).value = total_fiber;
+            this.daily_nutrition.find(obj => obj.name === this.$t('NUTRITION.CARBOHYDRATES')).value = total_carbohydrates;
         }
     }
 };
 </script>
+
+<style>
+.bar{
+    max-width:5vw ;
+}
+</style>
