@@ -11,11 +11,9 @@ import { createVuetify } from 'vuetify'
 
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import { VCalendar } from 'vuetify/labs/VCalendar'
+import * as labsComponents from 'vuetify/labs/components'
+// import { VCalendar } from 'vuetify/labs/VCalendar'
 import { createStore } from 'vuex'
-
-
-
 import { createI18n } from 'vue-i18n'
 
 
@@ -49,13 +47,8 @@ const store = createStore({
 const app = createApp(App)
 const vuetify = createVuetify({                                                              
     components,
-    directives
-    // components: {
-    //   VCalendar,
-    // },
-    
-    
-    
+    directives,
+    labsComponents,
   })
 
 

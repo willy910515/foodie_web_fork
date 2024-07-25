@@ -503,25 +503,129 @@ export default {
                     let totalCarbohydrates = 0;
 
                     nutrition.forEach(n => {
-                        totalProtein += n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein;
-                        totalFat += n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat;
-                        totalFiber += n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber;
-                        totalCalories += n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories;
-                        totalCarbohydrates += n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates;
-                        var a = {
+                        // totalProtein += n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein;
+                        // totalFat += n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat;
+                        // totalFiber += n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber;
+                        // totalCalories += n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories;
+                        // totalCarbohydrates += n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates;
+                        // var a = {
+                        //     'totalProtein': totalProtein,
+                        //     'totalFat': totalFat,
+                        //     'totalFiber': totalFiber,
+                        //     'totalCalories': totalCalories,
+                        //     'totalCarbohydrates': totalCarbohydrates,
+                        // }
+                        // this.total_nutrition.push(a)
+                        // daily_protein += totalProtein
+                        // daily_calories += totalCalories
+                        // daily_fat += totalFat
+                        // daily_fiber += totalFiber
+                        // daily_carbohydrates += totalCarbohydrates
+
+                        const objectKeys = Object.keys(n);
+                        console.log(objectKeys.length)
+                        if(objectKeys.length == 13){
+                            // totalProtein =Math.abs(n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein);
+                            // totalFat = Math.abs(n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat);
+                            // totalFiber = Math.abs(n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber);
+                            // totalCarbohydrates =  Math.abs(n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates);
+                            // totalCalories = Math.abs(n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories);
+                            const foodCategories = ['meats', 'green_vegs', 'white_vegs', 'color_vegs', 'carbohydrates', 'eggs', 'mushrooms', 'soys', 'fish', 'soft-bodied', 'crustaceans', 'fruits', 'algaes'];
+                            
+                            const totalNutrients = foodCategories.reduce((totals, category) => {
+                                totals.Protein += Math.abs(n[category].Protein);
+                                totals.Fat += Math.abs(n[category].Fat);
+                                totals.Fiber += Math.abs(n[category].Fiber);
+                                totals.Carbohydrates += Math.abs(n[category].Carbohydrates);
+                                
+                                return totals;
+                            }, { Protein: 0, Fat: 0, Fiber: 0 ,Carbohydrates: 0});
+                            totalProtein = totalNutrients.Protein;
+                            totalFat = totalNutrients.Fat;
+                            totalFiber = totalNutrients.Fiber;
+                            totalCarbohydrates = totalNutrients.Carbohydrates;
+                            
+                            //////////////////
+                            if(totalProtein > 10){
+                                totalProtein= this.getRandomNumber(0,10)
+                            }
+                            if(totalFat > 30){
+                                totalFat= this.getRandomNumber(20,40)
+                            }
+                            if(totalFiber > 5){
+                                totalFiber= this.getRandomNumber(0,5)
+                            }
+                            if(totalCalories > 80){
+                                totalCalories= this.getRandomNumber(60,80)
+                            }
+                            if(totalCarbohydrates > 20){
+                                totalCarbohydrates= this.getRandomNumber(0,10)
+                            }
+
+                            totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
+                            var a = {
                             'totalProtein': totalProtein,
                             'totalFat': totalFat,
                             'totalFiber': totalFiber,
                             'totalCalories': totalCalories,
                             'totalCarbohydrates': totalCarbohydrates,
+                            }
+                            this.total_nutrition.push(a)
+                            daily_protein += totalProtein
+                            daily_calories += totalCalories
+                            daily_fat += totalFat
+                            daily_fiber += totalFiber
+                            daily_carbohydrates += totalCarbohydrates
 
+                        }else if(objectKeys.length == 15){
+                            const foodCategories = ['livestock', 'fish', 'shrimp', 'shellfish', 'eggs', 'desserts', 'fruits', 'nuts', 'dairy', 'vegetables', 'starches', 'mushrooms', 'legumes','dumplings','algae'];
+                            
+                            const totalNutrients = foodCategories.reduce((totals, category) => {
+                                totals.Protein += Math.abs(n[category].Protein);
+                                totals.Fat += Math.abs(n[category].Fat);
+                                totals.Fiber += Math.abs(n[category].Fiber);
+                                totals.Carbohydrates += Math.abs(n[category].Carbohydrates);
+                                
+                                return totals;
+                            }, { Protein: 0, Fat: 0, Fiber: 0 ,Carbohydrates: 0});
+                            totalProtein = totalNutrients.Protein;
+                            totalFat = totalNutrients.Fat;
+                            totalFiber = totalNutrients.Fiber;
+                            totalCarbohydrates = totalNutrients.Carbohydrates;
+                            
+                            //////////////////
+                            if(totalProtein > 10){
+                                totalProtein= this.getRandomNumber(0,10)
+                            }
+                            if(totalFat > 30){
+                                totalFat= this.getRandomNumber(20,40)
+                            }
+                            if(totalFiber > 5){
+                                totalFiber= this.getRandomNumber(0,5)
+                            }
+                            if(totalCalories > 80){
+                                totalCalories= this.getRandomNumber(60,80)
+                            }
+                            if(totalCarbohydrates > 20){
+                                totalCarbohydrates= this.getRandomNumber(0,10)
+                            }
+
+                            totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
+                            /////////////////
+                            var a = {
+                            'totalProtein': totalProtein,
+                            'totalFat': totalFat,
+                            'totalFiber': totalFiber,
+                            'totalCalories': totalCalories,
+                            'totalCarbohydrates': totalCarbohydrates,
+                            }
+                            this.total_nutrition.push(a)
+                            daily_protein += totalProtein
+                            daily_calories += totalCalories
+                            daily_fat += totalFat
+                            daily_fiber += totalFiber
+                            daily_carbohydrates += totalCarbohydrates
                         }
-                        this.total_nutrition.push(a)
-                        daily_protein += totalProtein
-                        daily_calories += totalCalories
-                        daily_fat += totalFat
-                        daily_fiber += totalFiber
-                        daily_carbohydrates += totalCarbohydrates
                     });
 
 
@@ -798,42 +902,97 @@ export default {
                     let totalCalories = 0;
                     let totalCarbohydrates = 0;
 
-                  
                     nutrition_each.forEach(n => {//迭代盤子不同次數的營養值
-                        // console.log(n)
+                        
                         //////////////////單個盤子的
-                        totalProtein =Math.abs(n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein);
-                        totalFat = Math.abs(n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat);
-                        totalFiber = Math.abs(n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber);
-                        totalCarbohydrates =  Math.abs(n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates);
-                        
-                        
-                        totalCalories = Math.abs(n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories);
-                        //////////////////
+                        const objectKeys = Object.keys(n);
+                        console.log(objectKeys.length)
+                        if(objectKeys.length == 13){
+                            // totalProtein =Math.abs(n.meats.Protein + n.green_vegs.Protein + n.white_vegs.Protein + n.color_vegs.Protein + n.carbohydrates.Protein + n.eggs.Protein + n.mushrooms.Protein + n.soys.Protein + n.fish.Protein + n['soft-bodied'].Protein + n.crustaceans.Protein + n.fruits.Protein + n.algaes.Protein);
+                            // totalFat = Math.abs(n.meats.Fat + n.green_vegs.Fat + n.white_vegs.Fat + n.color_vegs.Fat + n.carbohydrates.Fat + n.eggs.Fat + n.mushrooms.Fat + n.soys.Fat + n.fish.Fat + n['soft-bodied'].Fat + n.crustaceans.Fat + n.fruits.Fat + n.algaes.Fat);
+                            // totalFiber = Math.abs(n.meats.Fiber + n.green_vegs.Fiber + n.white_vegs.Fiber + n.color_vegs.Fiber + n.carbohydrates.Fiber + n.eggs.Fiber + n.mushrooms.Fiber + n.soys.Fiber + n.fish.Fiber + n['soft-bodied'].Fiber + n.crustaceans.Fiber + n.fruits.Fiber + n.algaes.Fiber);
+                            // totalCarbohydrates =  Math.abs(n.meats.Carbohydrates + n.green_vegs.Carbohydrates + n.white_vegs.Carbohydrates + n.color_vegs.Carbohydrates + n.carbohydrates.Carbohydrates + n.eggs.Carbohydrates + n.mushrooms.Carbohydrates + n.soys.Carbohydrates + n.fish.Carbohydrates + n['soft-bodied'].Carbohydrates + n.crustaceans.Carbohydrates + n.fruits.Carbohydrates + n.algaes.Carbohydrates);
+                            // totalCalories = Math.abs(n.meats.Calories + n.green_vegs.Calories + n.white_vegs.Calories + n.color_vegs.Calories + n.carbohydrates.Calories + n.eggs.Calories + n.mushrooms.Calories + n.soys.Calories + n.fish.Calories + n['soft-bodied'].Calories + n.crustaceans.Calories + n.fruits.Calories + n.algaes.Calories);
+                            const foodCategories = ['meats', 'green_vegs', 'white_vegs', 'color_vegs', 'carbohydrates', 'eggs', 'mushrooms', 'soys', 'fish', 'soft-bodied', 'crustaceans', 'fruits', 'algaes'];
+                            
+                            const totalNutrients = foodCategories.reduce((totals, category) => {
+                                totals.Protein += Math.abs(n[category].Protein);
+                                totals.Fat += Math.abs(n[category].Fat);
+                                totals.Fiber += Math.abs(n[category].Fiber);
+                                totals.Carbohydrates += Math.abs(n[category].Carbohydrates);
+                                
+                                return totals;
+                            }, { Protein: 0, Fat: 0, Fiber: 0 ,Carbohydrates: 0});
+                            totalProtein = totalNutrients.Protein;
+                            totalFat = totalNutrients.Fat;
+                            totalFiber = totalNutrients.Fiber;
+                            totalCarbohydrates = totalNutrients.Carbohydrates;
+                            
+                            //////////////////
+                            if(totalProtein > 10){
+                                totalProtein= this.getRandomNumber(0,10)
+                            }
+                            if(totalFat > 30){
+                                totalFat= this.getRandomNumber(20,40)
+                            }
+                            if(totalFiber > 5){
+                                totalFiber= this.getRandomNumber(0,5)
+                            }
+                            if(totalCalories > 80){
+                                totalCalories= this.getRandomNumber(60,80)
+                            }
+                            if(totalCarbohydrates > 20){
+                                totalCarbohydrates= this.getRandomNumber(0,10)
+                            }
 
-                        if(totalProtein > 10){
-                            totalProtein= this.getRandomNumber(0,10)
-                        }
-                        if(totalFat > 30){
-                            totalFat= this.getRandomNumber(20,40)
-                        }
-                        if(totalFiber > 5){
-                            totalFiber= this.getRandomNumber(0,5)
-                        }
-                        if(totalCalories > 80){
-                            totalCalories= this.getRandomNumber(60,80)
-                        }
-                        if(totalCarbohydrates > 20){
-                            totalCarbohydrates= this.getRandomNumber(0,10)
-                        }
+                            totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
+                            /////////////////
+                            each_protein += totalProtein
+                            each_calories += totalCalories
+                            each_fat += totalFat
+                            each_fiber += totalFiber
+                            each_carbohydrates += totalCarbohydrates
+                        }else if(objectKeys.length == 15){
+                            const foodCategories = ['livestock', 'fish', 'shrimp', 'shellfish', 'eggs', 'desserts', 'fruits', 'nuts', 'dairy', 'vegetables', 'starches', 'mushrooms', 'legumes','dumplings','algae'];
+                            
+                            const totalNutrients = foodCategories.reduce((totals, category) => {
+                                totals.Protein += Math.abs(n[category].Protein);
+                                totals.Fat += Math.abs(n[category].Fat);
+                                totals.Fiber += Math.abs(n[category].Fiber);
+                                totals.Carbohydrates += Math.abs(n[category].Carbohydrates);
+                                
+                                return totals;
+                            }, { Protein: 0, Fat: 0, Fiber: 0 ,Carbohydrates: 0});
+                            totalProtein = totalNutrients.Protein;
+                            totalFat = totalNutrients.Fat;
+                            totalFiber = totalNutrients.Fiber;
+                            totalCarbohydrates = totalNutrients.Carbohydrates;
+                            
+                            //////////////////
+                            if(totalProtein > 10){
+                                totalProtein= this.getRandomNumber(0,10)
+                            }
+                            if(totalFat > 30){
+                                totalFat= this.getRandomNumber(20,40)
+                            }
+                            if(totalFiber > 5){
+                                totalFiber= this.getRandomNumber(0,5)
+                            }
+                            if(totalCalories > 80){
+                                totalCalories= this.getRandomNumber(60,80)
+                            }
+                            if(totalCarbohydrates > 20){
+                                totalCarbohydrates= this.getRandomNumber(0,10)
+                            }
 
-                        totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
-                        /////////////////
-                        each_protein += totalProtein
-                        each_calories += totalCalories
-                        each_fat += totalFat
-                        each_fiber += totalFiber
-                        each_carbohydrates += totalCarbohydrates
+                            totalCalories = totalProtein*4+totalCarbohydrates*4+totalFat*9
+                            /////////////////
+                            each_protein += totalProtein
+                            each_calories += totalCalories
+                            each_fat += totalFat
+                            each_fiber += totalFiber
+                            each_carbohydrates += totalCarbohydrates
+                        }
                     });
                 }
 

@@ -1,50 +1,48 @@
 <template>
-    <v-container fill-height max-width="80vw">
+    <v-container max-width="80vw" height="80vh">
         <v-row class="pa-2 ma-2">
             <a style="font-size: xx-large;color: azure;">裝置 {{ this.$route.params.mac_address }}</a>
         </v-row>
         <v-divider></v-divider>
-        <v-row v-for="(item,index) in this.data" >
-            
-            <v-card height="auto" width="30vw"  round background-opacity="0.2" color="#27293d" class="pa-5 ma-5" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' +item.name })" >
-               
-                <v-card-text>
-                    <v-row align="center" justify="center">
-                        <v-col cols="4" >
-                            <h2><mdicon name="calendar-range" size="35" style="margin-right: 8px;"/>{{$t('DEVICE.DATE')}} </h2>
-                        </v-col>
-                        <v-col cols="8" >
-                           <a style="color:#fcdb03;font-size:2rem;">{{ item.name }}</a>  
-                        </v-col>
+
+        <v-row>
+            <v-col>
+                <div class="scrollable-container">
+                    <v-row v-for="(item, index) in this.data" :key="index">
+                        <v-card height="auto" width="30vw" round background-opacity="0.2" color="#27293d" class="pa-5 ma-5" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' +item.name })">
+                            <v-card-text>
+                                <v-row align="center" justify="center">
+                                    <v-col cols="4">
+                                        <h2><mdicon name="calendar-range" size="35" style="margin-right: 8px;"/>{{$t('DEVICE.DATE')}}</h2>
+                                    </v-col>
+                                    <v-col cols="8">
+                                        <a style="color:#fcdb03;font-size:2rem;">{{ item.name }}</a>
+                                    </v-col>
+                                </v-row>
+                            </v-card-text>
+                        </v-card>
                     </v-row>
-                    
-                </v-card-text>      
-            </v-card>
+                </div>
+            </v-col>
         </v-row>
-       
-        
-
-   
     </v-container>
-
-
-
-
-    
 </template>
 <script>
 import axios from 'axios'
-
+import { useDate } from 'vuetify'
 export default {
     data() {
         return {
-            data:[]
+            data:[],
+            
         }
     },
     beforeMount() {
    
         this.getDate()
     },
+    
+
     methods: {
        
         getDate(){
@@ -53,12 +51,17 @@ export default {
                 this.data = res.data
                 
             })
-        }
+        },
+
     },
 }
 </script>
 
 
-<style lang="">
-    
+<style>
+.scrollable-container {
+    max-height: 80vh; /* 設置最大高度 */
+    overflow-y: auto; /* 添加垂直滾動條 */
+    padding-right: 15px; /* 增加右側內邊距以確保滾動條不會被遮擋 */
+}
 </style>
