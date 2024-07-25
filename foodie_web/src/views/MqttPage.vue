@@ -14,6 +14,22 @@
             </v-col>
         </v-row>
     </v-container>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+    >
+      {{ text }}
+
+      <template v-slot:actions>
+        <v-btn
+          color="blue"
+          variant="text"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
 
 </template>
 
@@ -23,7 +39,10 @@ import mqtt from 'mqtt';
 export default {
     data() {
         return {
-            client: null
+            client: null,
+            snackbar: false,
+            text: 'My timeout is set to 2000.',
+            timeout: 4000,
         }
     },
     created() {
@@ -45,6 +64,8 @@ export default {
                 if (error) {
                     console.error('MQTT 訊息發送失敗', error);
                 } else {
+                    this.text = `訊息 ${action} 已發送到主題 ${topic}`
+                    this.snackbar = true
                     console.log(`訊息 ${action} 已發送到主題 ${topic}`);
                 }
             });
