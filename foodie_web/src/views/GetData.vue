@@ -44,7 +44,7 @@
 
                     <v-col xl="4" xs="12" v-for="(item, index) in this.data_2" class="pa-2 ma-1" >
 
-                        <v-card class="food-card"  style="background: rgba(43, 172, 227, 0.1)" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' + this.$route.params.date+ '/food_order/'+ index})" >
+                        <v-card class="food-card"  style="background: rgba(43, 172, 227, 0.1)"  >
                             <v-card-title style="color: aliceblue;">
                                 <v-row>
                                     <v-col cols="9">
