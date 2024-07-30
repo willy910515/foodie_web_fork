@@ -9,7 +9,7 @@ export const locale = {
     },
     DEVICE:{
         DEVICE_NAME:'裝置名稱',
-        MAC_ADDRESS:'裝置MAC位置',
+        MAC_ADDRESS:'MAC位置',
         DATE:'資料日期',
         DIETARY:'飲食紀錄',
         NUTRITION_INTAKE_TIME_LINE:'營養攝取時間軸'

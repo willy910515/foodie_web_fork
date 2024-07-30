@@ -1,44 +1,50 @@
 <template>
-    <v-container fill-height max-width="80vw">
-        <v-row>
-            <v-col cols="12">
+    <v-container fill-height max-width="90vw" class="container" >
+        <v-row >
+            <v-col class="pa-0">
 
-                <v-card color="#27293d" class="pa-2 ma-2 rounded-xl" background-opacity="0.1">
-                    <v-row class="pa-0 ma-0" align="center" justify="center">
+                <v-card color="#27293d" class="title-card" background-opacity="0.1">
+                    <v-row no-gutters class="pa-0 ma-0" align="center" justify="center">
+                        <v-row no-gutters class="pa-2 ma-0" align="center" justify="center">
+                            <v-col  xs="6">
+                                <h2 class="header">
+                                    <mdicon name="map-marker-outline" size="35" style="margin-right:8px;" />
+                                    {{ $t('DEVICE.MAC_ADDRESS') }}
+                                </h2>
+                            </v-col >
+                            <v-col xs="6" >
+                                <v-chip label outlined size="x-large">
+                                    <a class="a" style="color:#fcdb03;">{{ this.$route.params.mac_address }}</a>
+                                </v-chip> 
+                            </v-col>    
+                        </v-row>
+                        <v-row no-gutters class="pa-2 ma-0" align="center" justify="center">
 
-                        <v-col cols="2">
-                            <h2>
-                                <mdicon name="map-marker-outline" size="35" style="margin-right:8px;" />
-                                {{ $t('DEVICE.MAC_ADDRESS') }}
-                            </h2>
-                        </v-col>
-                        <v-col cols="3"><v-chip label outlined size="x-large"><a
-                                    style="color:#fcdb03;font-size: x-large;">{{ this.$route.params.mac_address }}</a>
-                            </v-chip> </v-col>
-                        <v-col cols="2">
-                            <h2 vertical>
-                                <mdicon name="calendar-range" size="35" style="margin-right: 8px;" />
-                                {{ $t('DEVICE.DATE') }}
-                            </h2>
-
-                        </v-col>
-
-                        <v-col cols="3">
-                            <v-chip label outlined size="x-large"><a style="color:#84fc03;font-size: x-large;">{{
-                                    this.$route.params.date }} </a></v-chip>
-                        </v-col>
+                            <v-col  xs="6">
+                                <h2 vertical class="header">
+                                    <mdicon name="calendar-range" size="35" style="margin-right: 8px;" />
+                                    {{ $t('DEVICE.DATE') }}
+                                </h2>
+    
+                            </v-col>
+    
+                            <v-col  xs="6">
+                                <v-chip label outlined size="x-large">
+                                    <a class="a" style="color:#84fc03;">{{this.$route.params.date }} </a></v-chip>
+                            </v-col>
+                        </v-row>
                     </v-row>
 
                 </v-card>
             </v-col>
         </v-row>
-        <v-row>
-            <v-col>
-                <div style="width:70vw; display: flex;overflow-x: scroll;flex-direction: row;">
+        <v-row >
+            <v-col >
+                <div style="width:75vw; display: flex;overflow-x: scroll;flex-direction: row;" >
 
-                    <v-col cols="4" v-for="(item, index) in this.data_2" class="pa-2 ma-0" >
+                    <v-col xl="4" xs="12" v-for="(item, index) in this.data_2" class="pa-2 ma-1" >
 
-                        <v-card class="rounded-xl" width="22vw"  height="45vh" style="background: rgba(43, 172, 227, 0.1)" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' + this.$route.params.date+ '/food_order/'+ index})" >
+                        <v-card class="food-card"  style="background: rgba(43, 172, 227, 0.1)" v-on:click="$router.push({path:'/device/'+this.$route.params.mac_address+'/date/' + this.$route.params.date+ '/food_order/'+ index})" >
                             <v-card-title style="color: aliceblue;">
                                 <v-row>
                                     <v-col cols="9">
@@ -70,8 +76,8 @@
                                             <v-col align="right" style="max-width: 5vw; ; white-space: nowrap;">
 
                                                 <span
-                                                    style="font-size: 3rem;color:#1aedc6;width: fit-content;">{{ Math.round(
-                                    this.total_nutrition_each[index]['totalCalories']) }}</span>
+                                                    style="font-size: 3rem;color:#1aedc6;width: fit-content;">{{ Math.round(this.total_nutrition_each[index]['totalCalories']) }}
+                                                </span>
                                             </v-col>
 
                                         </v-row>
@@ -90,7 +96,8 @@
                                                     <v-row>
                                                         <v-col cols="5" align="right" class="pr-0">
                                                             <span
-                                                                style="color: #fcdb03;font-size: 1rem;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.PROTEIN') }}</span>
+                                                                class="span" style="color: #fcdb03;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.PROTEIN') }}
+                                                            </span>
                                                         </v-col>
                                                         <v-col>
 
@@ -98,9 +105,7 @@
                                                                 style="background-color: #ed1a52;height: 0.8rem;display: inline-flex;"
                                                                >
                                                             </div>
-                                                            <span style="color: antiquewhite;margin-left: 0.5rem;">{{
-                                    Math.round(this.total_nutrition_each[index]['totalProtein'])
-                                }} g</span>
+                                                            <span style="color: antiquewhite;margin-left: 0.5rem;">{{Math.round(this.total_nutrition_each[index]['totalProtein'])}} g</span>
                                                         </v-col>
                                                     </v-row>
 
@@ -114,7 +119,7 @@
                                                     <v-row>
                                                         <v-col cols="5" align="right" class="pr-0">
                                                             <span
-                                                                style="color: #fcdb03;font-size: 1rem;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.FAT') }}</span>
+                                                                class="span" style="color: #fcdb03;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.FAT') }}</span>
                                                         </v-col>
                                                         <v-col>
 
@@ -138,7 +143,7 @@
                                                     <v-row>
                                                         <v-col cols="5" align="right" class="pr-0">
                                                             <span
-                                                                style="color: #fcdb03;font-size: 1rem;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.FIBER') }}</span>
+                                                                class="span" style="color: #fcdb03;margin-right: 0;position: relative;display: inline;">{{ $t('NUTRITION.FIBER') }}</span>
                                                         </v-col>
                                                         <v-col>
 
@@ -162,7 +167,7 @@
                                                     <v-row>
                                                         <v-col cols="5" align="right" class="pr-0">
                                                             <span
-                                                                style="color: #fcdb03;font-size: 1rem;margin-right: 0;position: relative;display: inline;">{{$t('NUTRITION.CARBOHYDRATES')}}</span>
+                                                                class="span" style="color: #fcdb03;margin-right: 0;position: relative;display: inline;">{{$t('NUTRITION.CARBOHYDRATES')}}</span>
                                                         </v-col>
                                                         <v-col>
 
@@ -187,9 +192,9 @@
                                 <v-row>
                                     <v-divider></v-divider>
                                 </v-row>
-                                <v-row>
+                                <v-row align="center" justify="center">
                                     <!-- 使用v-if來確保在圖片存在時才顯示 -->
-                                    <img  :src=this.crop_time(item[0].file_name,) alt="" style="width:22vw" />
+                                    <img  :src=this.crop_time(item[0].file_name,) alt="" class="image" />
                                     <!-- <p v-else>正在加載圖片...</p> -->
                                 </v-row>
                             </v-card-text>
@@ -201,32 +206,41 @@
                 </div>
             </v-col>
         </v-row>
-        <v-row>
-            <v-col cols="6">
-                <v-card height="40vh" rounded="15px" ma-3 background-opacity="0.2" color="#27293d"
-                    class="pa-2 ma-2 rounded-xl">
-                    <div id="pie_chart" style="height: 40vh;color: aliceblue;"></div>
-                </v-card>
-
-            </v-col>
-            <v-col cols="6">
-                <v-card height="40vh" rounded="15px" ma-3 background-opacity="0.2" color="#27293d"
-                    class="pa-2 ma-2  rounded-xl">
-                    <div id="gauage_chart" style="height: 40vh;color: aliceblue;"></div>
-                </v-card>
-            </v-col>
-
-        </v-row>
-        <v-row no-gutters>
-            <v-card width="70vw" rounded="15%" background-opacity="0.2" color="#27293d" class="pa-2 ma-2  rounded-xl">
-                <div id="echarts" style="width: 70vw; height: 45vh;color: aliceblue;"></div>
-            </v-card>
-
-        </v-row>
+        
 
 
     </v-container>
+    <v-container >
+        <v-row no-gutters align="center" justify="center">
+            <v-row no-gutters >
+                <v-col xs="9"  align="center" justify="center">
+                    <v-card rounded="15px" background-opacity="0.2" color="#27293d" class="card-pie">
+                        <div id="pie_chart" style="color: aliceblue;"></div>
+                        
+                    </v-card>
 
+                </v-col>
+                <v-col xs="9" align="center" justify="center">
+                    <v-card  rounded="15px" background-opacity="0.2" color="#27293d"
+                        class="card-gauage">
+                        <div id="gauage_chart" style="color: aliceblue;"></div>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-row>
+        <v-row no-gutters align="center" justify="center">
+            
+            <v-row no-gutters align="center" justify="center">
+                <v-col align="center" justify="center">
+
+                    <v-card  rounded="15%" background-opacity="0.2" color="#27293d" class="card-echart">
+                        <div id="echarts" style="color: aliceblue;"></div>
+                    </v-card>
+                </v-col>
+            </v-row>
+            
+        </v-row>
+    </v-container>
 
 </template>
 <script>
@@ -274,12 +288,7 @@ export default {
             line_chart = echarts.init(document.getElementById("echarts"));
 
             line_chart.setOption({
-                title: {
-                    text: this.$t('DEVICE.NUTRITION_INTAKE_TIME_LINE'),
-                    textStyle: {
-                        color: "#42daf5"
-                    }
-                },
+
                 tooltip: {
                     trigger: 'axis'
                 },
@@ -341,7 +350,7 @@ export default {
                     left: 'center',
                     textStyle: {
                         color: '#e3ebfa',
-                        fontSize: "20px"
+                        fontSize: "1.5rem"
                     }
                 },
                 tooltip: {
@@ -726,11 +735,11 @@ export default {
                     series: [
                         {
                             type: 'pie',
-                            radius: '70%',
+                            radius: '40%',
                             label: {
                                 textStyle: {
                                     color: 'white',
-                                    fontSize: "20px"
+                                    fontSize: "1rem"
                                 }
                             }
                         },
@@ -1022,8 +1031,158 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .bar{
     max-width:5vw ;
+}
+/* 滾動條的整體樣式 */
+::-webkit-scrollbar {
+  width: 12px; /* 寬度 */
+}
+
+/* 滾動條軌道 */
+::-webkit-scrollbar-track {
+  background: #1d1d2e; /* 背景色 */
+  border-radius: 10px; /* 圓角 */
+}
+
+/* 滾動條滑塊 */
+::-webkit-scrollbar-thumb {
+  background: #ebebeb; /* 滑塊顏色 */
+  border-radius: 10px; /* 圓角 */
+}
+
+/* 滾動條滑塊在 hover 狀態 */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* 滑塊 hover 顏色 */
+}
+
+@media (max-width: 600px) {
+    .container{
+        margin: 0%;;
+        padding: 0%
+    }
+    .title-card{
+        padding: 0.5rem;
+        margin: 1rem;
+        border-radius: 0.5rem;
+        
+    }
+    .food-card{
+        width: 70vw;
+        height: 45vh;
+        padding: 2px;
+        margin: 10px;
+        border-radius: 1rem;
+    }
+
+    .header{
+        font-size: 0.9rem;
+    }
+    .chip{
+        font-size: 1rem;
+    }
+    .a{
+        font-size: large;
+    }
+    .image{
+        width: 60vw;
+    }
+    .span{
+        font-size: 0.8rem
+    }
+    .card-pie{
+        width: 80vw;
+        height: 50vh;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 1rem;
+    }
+    .card-gauage{
+        width: 80vw;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 1rem;
+    }
+    .card-echart{
+        width: 80vw;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 1rem;
+    }
+    #pie_chart{
+        height: 45vh;
+    }
+    #gauage_chart{
+        
+        height: 50vh;
+    }
+    #echarts{
+        width: 70vw; 
+        height: 40vh;
+        border-radius: 1rem;
+    }
+}
+@media (min-width: 600px) {
+    .title-card{
+        padding: 1.5rem;
+        margin: 1rem;
+        border-radius: 1rem;
+        
+    }
+    .food-card{
+        width: 22vw;
+        height: 45vh;
+        border-radius: 1rem;
+    }
+    .card-echart{
+        width: 65vw;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 2rem;
+    }
+    .header{
+        font-size: 2rem;
+    }
+    .chip{
+        font-size: 1.5rem;
+    }
+    .icon{
+        font-size: 50px;
+    }
+    .a{
+        font-size: x-large
+    }
+    .image{
+        width: 22vw;
+    }
+    .span{
+        font-size: 1rem
+    }
+    .card-pie{
+        width: 30vw;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 2rem;
+    }
+    .card-gauage{
+        width: 30vw;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 2rem;
+    }
+    #pie_chart{
+        
+        height: 50vh;
+    }
+    #gauage_chart{
+        
+        height: 50vh;
+    }
+    #echarts{
+        width: 60vw; 
+        height: 45vh;
+        border-radius: 2rem;
+    }
 }
 </style>

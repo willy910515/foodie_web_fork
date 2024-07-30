@@ -15,7 +15,7 @@ import HelloWorld from './components/HelloWorld.vue'
       
       <v-list nav density="compact">
         <!-- <v-list-item  value="/" to="/"  width="10vw"><mdicon name="home" style="color: aliceblue;margin-right: 8px;" />HOME </v-list-item> -->
-        <v-list-item  value="device" to="/device" width="10vw"><mdicon name="devices" style="color: aliceblue;margin-right: 8px;"/>DEVICE</v-list-item>
+        <v-list-item  value="device" to="/device" width="50vw"><mdicon name="devices" style="color: aliceblue;margin-right: 8px;"/>DEVICE</v-list-item>
         <!-- <v-list-item title="ALL DATA" value="supervisors" to="/getData" width="300px"><mdicon name="database-outline" /></v-list-item> -->
         
       </v-list>

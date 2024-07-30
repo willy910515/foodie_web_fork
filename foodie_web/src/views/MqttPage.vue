@@ -3,14 +3,14 @@
     <v-container
         grid-list-xl
         class="d-flex align-center justify-center"
-        style="height: 100vh;"
+        style="height: 80vh;width: 70vw;"
     >
         <v-row>
             <v-col class="d-flex justify-center">
-                <v-btn @click="sendMqttMessage('shot')" color="#34b4eb" size="30vw">開始</v-btn>
+                <v-btn @click="sendMqttMessage('shot')" color="#34b4eb" size="25vw" style="font-size:5vw;">開始</v-btn>
             </v-col>
             <v-col class="d-flex justify-center">
-                <v-btn @click="sendMqttMessage('stop')" color="#eb5534" size="30vw">停止</v-btn>
+                <v-btn @click="sendMqttMessage('stop')" color="#eb5534" size="25vw" style="font-size:5vw;">停止</v-btn>
             </v-col>
         </v-row>
     </v-container>
