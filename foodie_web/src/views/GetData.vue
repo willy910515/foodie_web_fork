@@ -229,6 +229,15 @@
             </v-row>
         </v-row>
         <v-row no-gutters align="center" justify="center">
+            <v-row no-gutters align="center" justify="center">
+                <v-col align="center" justify="center">
+                    <v-card  rounded="15%" background-opacity="0.2" color="#27293d" class="card-echart" >
+                        <div id="bar_chart" style="color: aliceblue;"></div>
+                    </v-card>
+                </v-col>
+            </v-row>
+        </v-row>
+        <v-row no-gutters align="center" justify="center">
             
             <v-row no-gutters align="center" justify="center">
                 <v-col align="center" justify="center">
@@ -250,7 +259,7 @@ import axios from 'axios'
 var line_chart
 var pie_chart
 var gauage_chart
-
+var bar_chart
 export default {
     data() {
         return {
@@ -268,21 +277,44 @@ export default {
             total_calories: [
                 { value: 0, name: this.$t('NUTRITION.CALORIES') }
             ],
-            time: "2023_11_02_12_52_23"
+            time: "2023_11_02_12_52_23",
+            daily_required_calories:0,
+            daily_required_protein:0,
+            daily_required_fat:0,
+            daily_required_fiber:0,
+            daily_required_carbohydrates:0,
+            sex:localStorage.getItem("sex"),
+            age:localStorage.getItem("age"),
+            height:localStorage.getItem("height"),
+            weight:localStorage.getItem("weight"),
         };
     },
     mounted() {
+        this.compute_daily_calories()
         this.createEcharts();
         this.create_pieChart()
         this.create_gauage()
+        this.create_barChart()
         this.getData();
-        // console.log(this.$refs.parentDiv.clientWidth)
-        // this.createEcharts();
+        
     },
     computed: {
 
     },
     methods: {
+        compute_daily_calories(){
+            if(this.sex == 0){
+                this.daily_required_calories = (13.7*this.weight) + (5*this.height) -(6.8*this.age) +66
+                
+            }else{
+                this.daily_required_calories = (10*this.weight) + (6.25*this.height) -(5*this.age) + 5
+            }
+
+            this.daily_required_protein = 1.3 * this.weight
+            this.daily_required_fat = 0.3 * this.daily_required_calories/9
+            this.daily_required_fiber = 14 * this.daily_required_calories/1000
+            this.daily_required_carbohydrates =  0.5 * this.daily_required_calories/4
+        },
         createEcharts() {
 
             line_chart = echarts.init(document.getElementById("echarts"));
@@ -372,16 +404,16 @@ export default {
                         endAngle: -20,
                         min: 0,
                         max: 3000,
-                        splitNumber: 12,
+                        splitNumber: 10,
                         itemStyle: {
-                            color: '#FFAB91'
+                            color: '#fd666d'
                         },
                         progress: {
                             show: true,
-                            width: 30
+                            width: 15
                         },
                         pointer: {
-                            show: false
+                            show: true
                         },
                         axisLine: {
                             lineStyle: {
@@ -420,16 +452,18 @@ export default {
                             width: '60%',
                             lineHeight: 40,
                             borderRadius: 8,
-                            offsetCenter: [0, '-15%'],
+                            offsetCenter: [0, '40%'],
                             fontSize: 30,
                             fontWeight: 'bolder',
                             formatter: '{value} kcal',
-                            color: 'inherit'
+                            color: '#fd666d'
                         },
                         data: [
                             {
                                 value: 2000
                             }
+
+
                         ]
                     },
                     {
@@ -440,11 +474,11 @@ export default {
                         min: 0,
                         max: 3000,
                         itemStyle: {
-                            color: '#FD7347'
+                            color: '#32a834'
                         },
                         progress: {
                             show: true,
-                            width: 8
+                            width: 30
                         },
                         pointer: {
                             show: false
@@ -462,12 +496,45 @@ export default {
                             show: false
                         },
                         detail: {
-                            show: false
-                        }
+                            valueAnimation: true,
+                            width: '60%',
+                            lineHeight: 40,
+                            borderRadius: 8,
+                            offsetCenter: [0, '70%'],
+                            fontSize: 25,
+                            fontWeight: 'bolder',
+                            formatter: ' 卡路里目標 {value} kcal',
+                            color: 'white'
+                        },
+                        data: [
+                            {
+                                value: this.daily_required_calories
+                            }
+
+
+                        ]
                     }
                 ]
             };
             gauage_chart.setOption(option)
+        },
+        create_barChart(option) {
+            bar_chart = echarts.init(document.getElementById("bar_chart"));
+            option = {
+                
+                legend: {show:true,textStyle: {
+                        color: '#e3ebfa',
+                        fontSize: "1.5rem"
+                    }
+                    
+                },
+                tooltip: {},
+                xAxis: { type: 'category'},
+                yAxis: {},
+                fontSize:60,
+                series: [{ type: 'bar' }, { type: 'bar' }]
+            };
+            bar_chart.setOption(option)
         },
         getData() {
             const path = "/api/food_history/device/" + this.$route.params.mac_address + "/date/" + this.$route.params.date
@@ -732,16 +799,24 @@ export default {
                     dataset: [{
                         source: this.daily_nutrition
                     }],
+                    legend: {
+                        orient: 'vertical',
+                        left: 'left',
+                        textStyle: {
+                                    color: 'white',
+                                    fontSize: "1rem"
+                                }
+                    },
                     series: [
                         {
                             type: 'pie',
                             radius: '40%',
-                            label: {
-                                textStyle: {
-                                    color: 'white',
-                                    fontSize: "1rem"
-                                }
-                            }
+                            // label: {
+                            //     textStyle: {
+                            //         color: 'white',
+                            //         fontSize: "1rem"
+                            //     }
+                            // }
                         },
                         {
 
@@ -753,7 +828,7 @@ export default {
                                     return param.percent + '%';
                                 },
                                 textStyle: {
-                                    color: 'black',
+                                    color: 'white',
                                     fontSize: "20px"
                                 }
 
@@ -762,7 +837,7 @@ export default {
                             radius: '70%',
 
                             emphasis: {
-                                label: { show: true },
+                                label: { show: false },
                                 itemStyle: {
                                     shadowBlur: 100,
                                     shadowOffsetX: 0,
@@ -777,19 +852,40 @@ export default {
                         {
                             data: [
                                 {
-                                    value: Math.round(this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value)
+                                    value: Math.round(this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value),
+                                    
                                 }
                             ]
                         },
-                        {
-                            data: [
-                                {
-                                    value: Math.round(this.total_calories.find(obj => obj.name === this.$t('NUTRITION.CALORIES')).value)
 
-                                }
-                            ]
-                        }
                     ]
+                })
+                console.log(this.daily_nutrition)
+                bar_chart.setOption({
+
+                    xAxis: { 
+                        type: 'category',
+                        data: [
+                            {value: '蛋白質', textStyle: {fontSize: "1rem",color:"white"}},
+                            {value: '脂肪', textStyle: {fontSize: "1rem",color:"white"}},
+                            {value: '膳食纖維', textStyle: {fontSize: "1rem",color:"white"}},
+                            {value: '碳水化合物', textStyle: {fontSize: "1rem",color:"white"}}
+                        ],
+                    },
+                    label: {
+                        show: true,
+                        position: 'outside'
+                    },
+                    color:["#34b4eb",'#eb4034'],
+                    dataset: {
+                    source: [
+                        ['product', '已攝取', '目標'],
+                        ['蛋白質', Math.round(this.daily_nutrition[0].value), Math.round(this.daily_required_protein)],
+                        ['脂肪', Math.round(this.daily_nutrition[1].value), Math.round(this.daily_required_fat)],
+                        ['膳食纖維', Math.round(this.daily_nutrition[2].value), Math.round(this.daily_required_fiber)],
+                        ['碳水化合物',Math.round(this.daily_nutrition[3].value), Math.round(this.daily_required_carbohydrates)]
+                    ],
+                    },
                 })
             })
 
@@ -1122,6 +1218,10 @@ export default {
         height: 40vh;
         border-radius: 1rem;
     }
+    #bar_chart{
+        
+        height: 50vh;
+    }
 }
 @media (min-width: 600px) {
     .title-card{
@@ -1183,6 +1283,10 @@ export default {
         width: 60vw; 
         height: 45vh;
         border-radius: 2rem;
+    }
+    #bar_chart{
+        
+        height: 50vh;
     }
 }
 </style>

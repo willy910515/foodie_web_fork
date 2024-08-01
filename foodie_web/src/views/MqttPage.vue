@@ -41,7 +41,7 @@ export default {
         return {
             client: null,
             snackbar: false,
-            text: 'My timeout is set to 2000.',
+            text: '',
             timeout: 4000,
         }
     },
