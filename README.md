@@ -9,7 +9,7 @@ https://nodejs.org/zh-tw/download/package-manager
 安裝 node.js module 
 ```
 cd foodie_web
-npm install package.json
+npm install
 ```
 啟動環境
 ```
