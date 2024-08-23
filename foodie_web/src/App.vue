@@ -25,7 +25,7 @@ import HelloWorld from './components/HelloWorld.vue'
 
     </div>
     
-    <v-container fluid class="primary fill-height" background-color="#27293d">
+    <v-container fluid class="primary fill-height" background-color="#696969">
     
       <RouterView />
     </v-container>
