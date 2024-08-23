@@ -48,7 +48,7 @@ export default {
     created() {
         
         this.client = mqtt.connect({
-            host: '114.32.9.225', // 替換為你的 MQTT broker 的 IP 地址
+            host: '114.34.73.26', // 替換為你的 MQTT broker 的 IP 地址
             port: 8083, // 替換為你的 MQTT broker 的端口號
             username: 'utl_food', // 替換為你的使用者名稱
             password: 'utl2041'  // 替換為你的密碼
