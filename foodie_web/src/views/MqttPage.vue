@@ -46,13 +46,8 @@ export default {
         }
     },
     created() {
-        
-        this.client = mqtt.connect({
-            host: '114.34.73.26', // 替換為你的 MQTT broker 的 IP 地址
-            port: 8083, // 替換為你的 MQTT broker 的端口號
-            username: 'utl_food', // 替換為你的使用者名稱
-            password: 'utl2041'  // 替換為你的密碼
-        }); // 替換為你的 MQTT 伺服器地址
+        user_information = open("foodie_web/config.json");
+        this.client = mqtt.connect(user_information);
         this.client.on('connect', () => {
             console.log('MQTT 連線成功');
         });
