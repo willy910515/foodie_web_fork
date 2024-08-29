@@ -35,6 +35,7 @@
 
 <script>
 import mqtt from 'mqtt';
+import config from '../config.json';
 
 export default {
     data() {
@@ -46,8 +47,12 @@ export default {
         }
     },
     created() {
-        user_information = open("foodie_web/config.json");
-        this.client = mqtt.connect(user_information);
+        this.client = mqtt.connect({
+            host: config.host,
+            port: config.port,
+            username: config.username,
+            password: config.password
+        });
         this.client.on('connect', () => {
             console.log('MQTT 連線成功');
         });
